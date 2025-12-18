@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Step1Semester from './steps/Step1Semester';
 import Step2Stage from './steps/Step2Stage';
+import Step3CurrentCGPA from './steps/Step3CurrentCGPA';
 
 export type AcademicStage = 
   | 'BEFORE_MID1' 
@@ -12,6 +13,7 @@ interface WizardState {
   currentStep: number;
   selectedSemester: string;
   stage: AcademicStage | null;
+  currentCgpa: number | null;
 }
 
 const Wizard = () => {
@@ -19,6 +21,7 @@ const Wizard = () => {
     currentStep: 1,
     selectedSemester: '2-1', // Hardcoded for v1
     stage: null,
+    currentCgpa: null,
   });
 
   const handleNext = () => {
@@ -42,6 +45,13 @@ const Wizard = () => {
     }));
   };
 
+  const handleCgpaChange = (cgpa: number | null) => {
+    setWizardState(prev => ({
+      ...prev,
+      currentCgpa: cgpa,
+    }));
+  };
+
   const renderStep = () => {
     switch (wizardState.currentStep) {
       case 1:
@@ -55,6 +65,15 @@ const Wizard = () => {
           <Step2Stage 
             selectedStage={wizardState.stage}
             onStageSelect={handleStageSelect}
+            onNext={handleNext}
+            onBack={handleBack}
+          />
+        );
+      case 3:
+        return (
+          <Step3CurrentCGPA 
+            currentCgpa={wizardState.currentCgpa}
+            onCgpaChange={handleCgpaChange}
             onNext={handleNext}
             onBack={handleBack}
           />
