@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Step1Semester from './steps/Step1Semester';
 import Step2Stage from './steps/Step2Stage';
 import Step3CurrentCGPA from './steps/Step3CurrentCGPA';
+import Step4SubjectMarks, { SubjectMarks } from './steps/Step4SubjectMarks';
+import { getCurrentSemester } from '../../data/curriculum';
 
 export type AcademicStage = 
   | 'BEFORE_MID1' 
@@ -14,14 +16,32 @@ interface WizardState {
   selectedSemester: string;
   stage: AcademicStage | null;
   currentCgpa: number | null;
+  subjectMarks: Record<string, SubjectMarks>;
 }
 
 const Wizard = () => {
+  // Initialize subject marks structure
+  const initializeSubjectMarks = (): Record<string, SubjectMarks> => {
+    const semesterData = getCurrentSemester();
+    const marks: Record<string, SubjectMarks> = {};
+    
+    semesterData.subjects.forEach(subject => {
+      marks[subject.code] = {
+        mid1: null,
+        mid2: null,
+        internals: null,
+      };
+    });
+    
+    return marks;
+  };
+
   const [wizardState, setWizardState] = useState<WizardState>({
     currentStep: 1,
     selectedSemester: '2-1', // Hardcoded for v1
     stage: null,
     currentCgpa: null,
+    subjectMarks: initializeSubjectMarks(),
   });
 
   const handleNext = () => {
@@ -52,6 +72,23 @@ const Wizard = () => {
     }));
   };
 
+  const handleMarksChange = (
+    subjectCode: string,
+    field: keyof SubjectMarks,
+    value: number | null
+  ) => {
+    setWizardState(prev => ({
+      ...prev,
+      subjectMarks: {
+        ...prev.subjectMarks,
+        [subjectCode]: {
+          ...prev.subjectMarks[subjectCode],
+          [field]: value,
+        },
+      },
+    }));
+  };
+
   const renderStep = () => {
     switch (wizardState.currentStep) {
       case 1:
@@ -74,6 +111,16 @@ const Wizard = () => {
           <Step3CurrentCGPA 
             currentCgpa={wizardState.currentCgpa}
             onCgpaChange={handleCgpaChange}
+            onNext={handleNext}
+            onBack={handleBack}
+          />
+        );
+      case 4:
+        return (
+          <Step4SubjectMarks 
+            stage={wizardState.stage}
+            subjectMarks={wizardState.subjectMarks}
+            onMarksChange={handleMarksChange}
             onNext={handleNext}
             onBack={handleBack}
           />
