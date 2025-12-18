@@ -1,0 +1,93 @@
+{
+  "branch": "Information Technology",
+  "regulation": "R22",
+  "gradingSystem": {
+    "type": "10-point",
+    "grades": {
+      "O": { "min": 90, "points": 10 },
+      "A+": { "min": 80, "points": 9 },
+      "A": { "min": 70, "points": 8 },
+      "B+": { "min": 60, "points": 7 },
+      "B": { "min": 50, "points": 6 },
+      "F": { "min": 0, "points": 0 }
+    }
+  },
+  "examPattern": {
+    "theory": {
+      "total": 100,
+      "midAvg": 30,
+      "internals": 10,
+      "semesterExam": 60
+    },
+    "lab": {
+      "total": 100,
+      "internals": 40,
+      "external": 60
+    }
+  },
+  "years": {
+    "1-1": {
+      "name": "I Year - I Semester",
+      "totalCredits": 20,
+      "subjects": [
+        { "code": "A221001", "name": "Mathematics-I", "credits": 4.0, "type": "theory" },
+        { "code": "A221002", "name": "Applied Physics", "credits": 4.0, "type": "theory" },
+        { "code": "A221502", "name": "Programming for Problem Solving", "credits": 3.0, "type": "theory" },
+        { "code": "A221381", "name": "Engineering Workshop", "credits": 2.5, "type": "lab" },
+        { "code": "A221003", "name": "English for Skill Enhancement", "credits": 2.0, "type": "theory" },
+        { "code": "A221503", "name": "Elements of Computer Science & Engineering", "credits": 1.0, "type": "theory" },
+        { "code": "A221081", "name": "Applied Physics Lab", "credits": 1.5, "type": "lab" },
+        { "code": "A221082", "name": "English Language & Communication Skills Lab", "credits": 1.0, "type": "lab" },
+        { "code": "A221582", "name": "Programming for Problem Solving Lab", "credits": 1.0, "type": "lab" }
+      ]
+    },
+
+    "1-2": {
+      "name": "I Year - II Semester",
+      "totalCredits": 20,
+      "subjects": [
+        { "code": "A222005", "name": "Mathematics-II", "credits": 4.0, "type": "theory" },
+        { "code": "A222006", "name": "Engineering Chemistry", "credits": 4.0, "type": "theory" },
+        { "code": "A222303", "name": "Engineering Graphics & Modelling", "credits": 3.0, "type": "theory" },
+        { "code": "A222204", "name": "Basic Electrical Engineering", "credits": 2.0, "type": "theory" },
+        { "code": "A222402", "name": "Electronic Devices & Circuits", "credits": 2.0, "type": "theory" },
+        { "code": "A222583", "name": "Python Programming Lab", "credits": 3.0, "type": "lab" },
+        { "code": "A222084", "name": "Engineering Chemistry Lab", "credits": 1.0, "type": "lab" },
+        { "code": "A222283", "name": "Basic Electrical Engineering Lab", "credits": 1.0, "type": "lab" }
+      ]
+    },
+
+    "2-1": {
+      "name": "II Year - I Semester",
+      "totalCredits": 20,
+      "subjects": [
+        { "code": "A223011", "name": "Mathematical Foundations of Computer Science", "credits": 3, "type": "theory" },
+        { "code": "A223504", "name": "Data Structures", "credits": 3, "type": "theory" },
+        { "code": "A223009", "name": "Probability & Statistics", "credits": 4, "type": "theory" },
+        { "code": "A223505", "name": "Computer System Architecture", "credits": 3, "type": "theory" },
+        { "code": "A223506", "name": "Database Management Systems", "credits": 3, "type": "theory" },
+        { "code": "A223584", "name": "Data Structures Lab", "credits": 1, "type": "lab" },
+        { "code": "A223585", "name": "Database Management Systems Lab", "credits": 1, "type": "lab" },
+        { "code": "A223012", "name": "Professional Communication", "credits": 1, "type": "theory" },
+        { "code": "A223588", "name": "Skill Development: Data Visualization (R)", "credits": 1, "type": "lab" }
+      ]
+    },
+
+    "2-2": {
+      "name": "II Year - II Semester",
+      "totalCredits": 20,
+      "subjects": [
+        { "code": "A224514", "name": "Software Engineering", "credits": 3, "type": "theory" },
+        { "code": "A224511", "name": "Design & Analysis of Algorithms", "credits": 3, "type": "theory" },
+        { "code": "A224512", "name": "Operating Systems", "credits": 3, "type": "theory" },
+        { "code": "A224516", "name": "Fundamentals of Internet of Things", "credits": 2, "type": "theory" },
+        { "code": "A224513", "name": "Object Oriented Programming through Java", "credits": 3, "type": "theory" },
+        { "code": "A224592", "name": "Java Lab", "credits": 1, "type": "lab" },
+        { "code": "A224591", "name": "Operating Systems Lab", "credits": 1, "type": "lab" },
+        { "code": "A2245P1", "name": "Mini Project / Societal Project", "credits": 2, "type": "lab" },
+        { "code": "A224013", "name": "Quantitative Methods & Logical Reasoning", "credits": 1, "type": "theory" },
+        { "code": "A224597", "name": "Skill Development: Node JS", "credits": 1, "type": "lab" }
+      ]
+    }
+  }
+}
