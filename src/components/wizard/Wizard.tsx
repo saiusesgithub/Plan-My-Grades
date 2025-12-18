@@ -3,6 +3,7 @@ import Step1Semester from './steps/Step1Semester';
 import Step2Stage from './steps/Step2Stage';
 import Step3CurrentCGPA from './steps/Step3CurrentCGPA';
 import Step4SubjectMarks, { SubjectMarks } from './steps/Step4SubjectMarks';
+import Step5TargetGrades, { TargetGrade } from './steps/Step5TargetGrades';
 import { getCurrentSemester } from '../../data/curriculum';
 
 export type AcademicStage = 
@@ -17,6 +18,7 @@ interface WizardState {
   stage: AcademicStage | null;
   currentCgpa: number | null;
   subjectMarks: Record<string, SubjectMarks>;
+  targetGrades: Record<string, TargetGrade>;
 }
 
 const Wizard = () => {
@@ -36,12 +38,27 @@ const Wizard = () => {
     return marks;
   };
 
+  // Initialize target grades (default to 'O' for theory subjects)
+  const initializeTargetGrades = (): Record<string, TargetGrade> => {
+    const semesterData = getCurrentSemester();
+    const grades: Record<string, TargetGrade> = {};
+    
+    semesterData.subjects
+      .filter(subject => subject.type === 'theory')
+      .forEach(subject => {
+        grades[subject.code] = 'O';
+      });
+    
+    return grades;
+  };
+
   const [wizardState, setWizardState] = useState<WizardState>({
     currentStep: 1,
     selectedSemester: '2-1', // Hardcoded for v1
     stage: null,
     currentCgpa: null,
     subjectMarks: initializeSubjectMarks(),
+    targetGrades: initializeTargetGrades(),
   });
 
   const handleNext = () => {
@@ -89,6 +106,16 @@ const Wizard = () => {
     }));
   };
 
+  const handleGradeChange = (subjectCode: string, grade: TargetGrade) => {
+    setWizardState(prev => ({
+      ...prev,
+      targetGrades: {
+        ...prev.targetGrades,
+        [subjectCode]: grade,
+      },
+    }));
+  };
+
   const renderStep = () => {
     switch (wizardState.currentStep) {
       case 1:
@@ -121,6 +148,15 @@ const Wizard = () => {
             stage={wizardState.stage}
             subjectMarks={wizardState.subjectMarks}
             onMarksChange={handleMarksChange}
+            onNext={handleNext}
+            onBack={handleBack}
+          />
+        );
+      case 5:
+        return (
+          <Step5TargetGrades 
+            targetGrades={wizardState.targetGrades}
+            onGradeChange={handleGradeChange}
             onNext={handleNext}
             onBack={handleBack}
           />
